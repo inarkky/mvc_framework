@@ -63,7 +63,13 @@ define('DATABASE_PATH',     ROOT_PATH               . 'database/');
     define('SEEDS_PATH',        DATABASE_PATH       . 'seeds/');
 
 //SECURITY
-define("JWT_TOKEN", "Secret11791*=");
+define('JWT_TOKEN', [
+    'SECRET'          => 'DEF_0.9 Masa4Acc-Tok 9-sec',
+    'REFRESH_SECRET'  => 'DEF_0.9 4ref Tok-sec',
+    'DATA_SECRET'     => 'Int DEF/0.9 Tok-sec lev1',
+    'MEDIA_SECRET'    => 'Int DEF/0.9 Tok-sec lev1',
+    'INTERNAL_SECRET' => 'DEF_0.9 Int_tok tok-sec',
+]);
 
 //SESSION CONFIG
 define('SESSION_KEY', 'bRuD5WYw5wd0rdHR9yLlM6wt2vteuiniQBqE70nAuhU=');
