@@ -1,0 +1,1 @@
+<link type="text/css" rel="stylesheet" href="<?php echo CSS_URL ?>main.css" media="all" />

@@ -1,0 +1,5 @@
+application/storage/sessions/
+application/storage/logs/
+application/storage/media/
+application/storage/cache/
+.idea

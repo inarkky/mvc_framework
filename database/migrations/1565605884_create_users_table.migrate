@@ -1,0 +1,7 @@
+TABLE USERS
++id         : integer(11)   : PRIMARY,AUTO_INCREMENT
++username   : varchar(32)   : UNIQUE
++password   : varchar(32)
++email      : varchar(64)   : UNIQUE
++fullname   : varchar(64)
++privilege  : integer(2)    : INDEX
