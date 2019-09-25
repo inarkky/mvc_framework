@@ -13,6 +13,7 @@ abstract class Model
 
     protected static $_table = '';
     protected static $_primaryKey = '';
+
     protected $columns;
 
 	public function __construct() 
@@ -37,12 +38,11 @@ abstract class Model
         return ($where) ? $this->db->update(static::$_table, $data, $where) : $this->db->insert(static::$_table, $data);
     }
 
-    public function delete(){
-        $query = "DELETE FROM " . static::$_table . " WHERE ".static::$_primaryKey."=:id LIMIT 1";
-        return $this->db->select($query, [':id'=>$this->columns[static::$_primaryKey]]);
+    public static function delete($value){
+        return DB::connect()->delete(static::$_table, [static::$_primaryKey => $value]);
     }
 
-    public function getAll($condition=array(),$order=NULL,$startIndex=NULL,$count=NULL){
+    public static function getAll($condition=array(),$order=NULL,$startIndex=NULL,$count=NULL){
         $query = "SELECT * FROM " . static::$_table;
         if(!empty($condition)){
             $query .= " WHERE ";
@@ -64,19 +64,19 @@ abstract class Model
             $condition[':'.$key] = $value;
             unset($condition[$key]);
         }
-        return $this->db->select($query,$condition);
+        return DB::connect()->select($query,$condition);
     }
 
-    public function findOne($value){
+    public static function findOne($value){
 
 	    $sql = "SELECT * FROM " . static::$_table . " WHERE " . static::$_primaryKey . " = :" . static::$_primaryKey;
 	    $params = [ ":" . static::$_primaryKey => $value];
 	    $mode = [ ":" . static::$_primaryKey => $value];
 
-        return $this->db->find($sql, $params);
+        return DB::connect()->find($sql, $params);
     }
 
-    public function getCount(){
-        return $this->db->count(static::$_table);
+    public static function getCount(){
+        return DB::connect()->count(static::$_table);
     }
 }

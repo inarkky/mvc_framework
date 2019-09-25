@@ -2,6 +2,7 @@
 
 //ENVIRONMENT dev/prod
 define('ENVIRONMENT', 'dev');
+define('ROOT_URI_PATH', '/'); //or if you are on xampp name of the project folder in htdocs
 
 //DB CONNECTIONS
 define ('CONNECTIONS', [
