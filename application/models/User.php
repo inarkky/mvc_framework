@@ -17,13 +17,6 @@ class User extends Model
 	const PRIV_MEMBER= 8;
 	const PRIV_GUEST= 99;
 
-	public $id;
-	public $username;
-	public $password;
-	public $email;
-	public $fullname;
-	public $privilege;
-
 	public function getId()
 	{
 
@@ -98,38 +91,43 @@ class User extends Model
 
 	public function whereId($id)
 	{
-
-		return $this->db->select(" * FROM " . static::$_table . " WHERE id = :id", [":id" => $id], $fetchMode = PDO::FETCH_OBJ, $class = '', 1);
+		$this->populate($this->findOne($id));
+		return $this;
 	}
 
 	public function whereUsername($username)
 	{
 
-		return $this->db->select(" * FROM " . static::$_table . " WHERE username = :username", [":username" => $username]);
+		$this->getAll(["username" => $username]);
+		return $this;
 	}
 
 	public function wherePassword($password)
 	{
 
-		return $this->db->select(" * FROM " . static::$_table . " WHERE password = :password", [":password" => $password]);
+		$this-getAll(["password" => $password]);
+		return $this;
 	}
 
 	public function whereEmail($email)
 	{
 
-		return $this->db->select(" * FROM " . static::$_table . " WHERE email = :email", [":email" => $email]);
+		$this->getAll(["email" => $email]);
+		return $this;
 	}
 
 	public function whereFullname($fullname)
 	{
 
-		return $this->db->select(" * FROM " . static::$_table . " WHERE fullname = :fullname", [":fullname" => $fullname]);
+		$this->getAll(["fullname" => $fullname]);
+		return $this;
 	}
 
 	public function wherePrivilege($privilege)
 	{
 
-		return $this->db->select(" * FROM " . static::$_table . " WHERE privilege = :privilege", [":privilege" => $privilege]);
+		$this->getAll(["privilege" => $privilege]);
+		return $this;
 	}
 
 }

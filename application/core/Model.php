@@ -24,18 +24,39 @@ abstract class Model
         $this->columns = [];
 	}
 
-    public function set($column,$value){
+    protected function populate($object)
+    {
+        foreach ($object as $key => $value) {
+            if($key != $_primaryKey) $this->set($key, $value);
+        }
+    }
+
+    public function set($column,$value)
+    {
         $this->columns[$column] = $value;
     }
 
-    public function get($column){
+    public function get($column)
+    {
         return $this->columns[$column];
     }
 
-    public function save($data, $where = NULL)
+    public function create($data)
     {
 
-        return ($where) ? $this->db->update(static::$_table, $data, $where) : $this->db->insert(static::$_table, $data);
+        return $this->db->insert(static::$_table, $data);
+    }
+
+    public function update($data, $where = NULL)
+    {
+
+        return $this->db->update(static::$_table, $data, $where);
+    }
+
+    public function save($where = NULL)
+    {
+
+        return ($where) ? $this->db->update(static::$_table, $this->columns, $where) : $this->db->insert(static::$_table, $this->columns);
     }
 
     public static function delete($value){
@@ -64,6 +85,7 @@ abstract class Model
             $condition[':'.$key] = $value;
             unset($condition[$key]);
         }
+
         return DB::connect()->select($query,$condition);
     }
 
@@ -73,7 +95,9 @@ abstract class Model
 	    $params = [ ":" . static::$_primaryKey => $value];
 	    $mode = [ ":" . static::$_primaryKey => $value];
 
-        return DB::connect()->find($sql, $params);
+        $result = DB::connect()->find($sql, $params);
+        
+        return $result;
     }
 
     public static function getCount(){
