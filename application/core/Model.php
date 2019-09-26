@@ -27,7 +27,7 @@ abstract class Model
     protected function populate($object)
     {
         foreach ($object as $key => $value) {
-            if($key != $_primaryKey) $this->set($key, $value);
+            $this->set($key, $value);
         }
     }
 
@@ -41,22 +41,23 @@ abstract class Model
         return $this->columns[$column];
     }
 
-    public function create($data)
+    public function create()
     {
 
-        return $this->db->insert(static::$_table, $data);
+        return $this->db->insert(static::$_table, $this->columns);
     }
 
-    public function update($data, $where = NULL)
+    public function update($where = NULL)
     {
 
-        return $this->db->update(static::$_table, $data, $where);
+        return $this->db->update(static::$_table, $this->columns, $where);
     }
 
     public function save($where = NULL)
     {
-
-        return ($where) ? $this->db->update(static::$_table, $this->columns, $where) : $this->db->insert(static::$_table, $this->columns);
+        if($where || $this->get(static::$_primaryKey) !== null) $this->db->update(static::$_table, $this->columns, ($where)?$where:[static::$_primaryKey=>$this->get(static::$_primaryKey)]);
+        else $this->db->insert(static::$_table, $this->columns);
+        return $this;
     }
 
     public static function delete($value){
