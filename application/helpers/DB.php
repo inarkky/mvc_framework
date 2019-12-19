@@ -10,9 +10,9 @@ class DB extends PDO
 
     protected static $instances = array();
 
-    public static function connect($connection = 'default')
+    public static function connect($connection = 'DEFAULT')
     {
-        ($connection === 'default') ? $db = CONNECTIONS['default'] : $db = CONNECTIONS[$connection];
+        ($connection === 'DEFAULT') ? $db = CONNECTIONS['DEFAULT'] : $db = CONNECTIONS[$connection];
         if($db === NULL) die("Connection '$connection' is not defined");
 
         $type = $db['DB_TYPE'];

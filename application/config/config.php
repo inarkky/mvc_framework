@@ -1,18 +1,17 @@
 <?php
 
-//ENVIRONMENT dev/prod
 define('ENVIRONMENT', 'dev');
 define('ROOT_URI_PATH', '/'); //or if you are on xampp name of the project folder in htdocs
 
 //DB CONNECTIONS
 define ('CONNECTIONS', [
-    'default' => [
+    'DEFAULT' => [
         'DB_TYPE' => 'mysql',
         'DB_HOST' => '127.0.0.1',
         'DB_PORT' => '3306',
         'DB_NAME' => 'development',
         'DB_USER' => 'root',
-        'DB_PASS' => 'root',
+        'DB_PASS' => '',
         'DB_CHARSET' => 'utf8'
     ],
     'B2B' => [
@@ -21,13 +20,24 @@ define ('CONNECTIONS', [
         'DB_PORT' => '3306',
         'DB_NAME' => 'b2b',
         'DB_USER' => 'root',
-        'DB_PASS' => 'root',
+        'DB_PASS' => '',
         'DB_CHARSET' => 'utf8'
     ]
 ]);
 
 //EMAIL SETTINGS
-//TODO: add email params
+define("ADMIN", [
+    "name"  => "Administrator",
+    "email" => "admin@mail.com" 
+]);
+define("INFO", [
+    "name"  => "Info Service",
+    "email" => "info@mail.com" 
+]);
+define("FEED", [
+    "name"  => "Feedback",
+    "email" => "feedback@mail.com" 
+]);
 
 //WEB STRUCTURE
 define('URL_PROTOCOL',      '//'); //protocol independent

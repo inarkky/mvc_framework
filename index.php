@@ -2,7 +2,6 @@
 
 use application\core\Router;
 use application\core\Middleware;
-use application\models\User;
 
 define('ROOT_PATH', __DIR__. '/');
 require_once 'application/config/config.php';

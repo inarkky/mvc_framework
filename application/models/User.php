@@ -4,18 +4,18 @@ namespace application\models;
 
 
 use application\core\Model;
-use PDO;
 
 class User extends Model
 {
 	protected static $_table = 'users';
-	protected static $_primaryKey = 'id';
+	protected static $primaryKey = 'id';
 
-	const PRIV_ADMINISTRATOR = 1;
-	const PRIV_MODERATOR= 2;
-	const PRIV_EDITOR= 3;
-	const PRIV_MEMBER= 8;
-	const PRIV_GUEST= 99;
+	public $id;
+	public $username;
+	public $password;
+	public $email;
+	public $fullname;
+	public $privilege;
 
 	public function getId()
 	{
@@ -91,7 +91,8 @@ class User extends Model
 
 	public function whereId($id)
 	{
-		$this->populate($this->findOne($id));
+
+		$this->populate($this->findOne($id);
 		return $this;
 	}
 
@@ -99,13 +100,6 @@ class User extends Model
 	{
 
 		$this->getAll(["username" => $username]);
-		return $this;
-	}
-
-	public function wherePassword($password)
-	{
-
-		$this-getAll(["password" => $password]);
 		return $this;
 	}
 

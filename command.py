@@ -26,6 +26,7 @@ def menu():
     return input("Choose one: ")
 
 
+'''
 def privilege(model):
     f = open(_MODELS_PATH + model + ".php", "a")
     f.write("\tconst PRIV_ADMINISTRATOR = 1;\n")
@@ -34,6 +35,7 @@ def privilege(model):
     f.write("\tconst PRIV_MEMBER= 8;\n")
     f.write("\tconst PRIV_GUEST= 99;\n\n")
     f.close()
+'''
 
 
 def params(x, model):
@@ -73,21 +75,33 @@ def setters(x, model):
 
 
 def where(x, model):
+    res = 0
     f = open(_MODELS_PATH + model + ".php", "a")
     for i in x:
         param = i.split(":")
+        try:
+            attributes = param[2].split(",")
+            subs = 'PRIMARY'
+            res = len(list(filter(lambda x: subs in x, attributes)))
+        except KeyError:
+            pass
+
         attribute = param[0].strip()
         if attribute[0] == "+":
             f.write("\n\tpublic function where" + attribute.lstrip("+").capitalize() + "($" + attribute.lstrip("+") + ")")
             f.write("\n\t{\n")
-            f.write('\n\t\treturn $this->db->select(" * FROM " . $this->_table . " WHERE ' + attribute.lstrip("+") + ' = :' + attribute.lstrip("+") + '", [":' + attribute.lstrip("+") + '" => $' + attribute.lstrip("+") + ']);')
+            if(res):
+                f.write('\n\t\t$this->populate($this->findOne($' + attribute.lstrip("+") + ');')
+            else:
+                f.write('\n\t\t$this->getAll(["' + attribute.lstrip("+") + '" => $' + attribute.lstrip("+") + ']);')
+            f.write("\n\t\treturn $this;")
             f.write("\n\t}\n")
     f.close()
 
 
 def main():
     while True:
-        option = menu();
+        option = menu()
         if option.lower() == "q":
             break
         elif option.lower() == "a":
@@ -103,7 +117,7 @@ def main():
             files = [f for f in listdir(_MIGRATION_PATH) if isfile(join(_MIGRATION_PATH, f))]
             for file in files:
                 with open(join(_MIGRATION_PATH, file), 'r') as f:
-                    table = f.readline();
+                    table = f.readline()
                     tables.append(table)
                     lines = f.read().splitlines()
                     values.append([table, lines])
@@ -122,8 +136,8 @@ def main():
                 f.write("\tprotected static $_table = '" + table + "';\n\tprotected static $primaryKey = 'id';\n\n")
                 f.close()
 
-                if model.lower() == "user":
-                    privilege(model)
+#                if model.lower() == "user":
+#                    privilege(model)
                 params(par, model)
                 getters(par, model)
                 setters(par, model)
