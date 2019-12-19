@@ -1,7 +1,9 @@
 <?php
 
 define('ENVIRONMENT', 'dev');
-define('ROOT_URI_PATH', '/'); //or if you are on xampp name of the project folder in htdocs
+define('ROOT_URI_PATH', '/borna/'); //or if you are on xampp name of the project folder in htdocs
+define('LANG', 'en'); //TODO: translations
+define('TIMEZONE', 'UTC'); 
 
 //DB CONNECTIONS
 define ('CONNECTIONS', [
@@ -26,17 +28,22 @@ define ('CONNECTIONS', [
 ]);
 
 //EMAIL SETTINGS
-define("ADMIN", [
-    "name"  => "Administrator",
-    "email" => "admin@mail.com" 
-]);
-define("INFO", [
-    "name"  => "Info Service",
-    "email" => "info@mail.com" 
-]);
-define("FEED", [
-    "name"  => "Feedback",
-    "email" => "feedback@mail.com" 
+define("EMAIL", [
+    "ADMIN" => [
+        "name"      => "Administrator",
+        "email"     => "admin@mail.com",
+        "noReply"   => false
+    ],
+    "FEED"  => [
+        "name"      => "Feedback",
+        "email"     => "feedback@mail.com",
+        "noReply"   => false
+    ],
+    "INFO"  => [
+        "name"      => "Info Service",
+        "email"     => "info@mail.com",
+        "noReply"   => true
+    ]
 ]);
 
 //WEB STRUCTURE
@@ -82,6 +89,6 @@ define('JWT_TOKEN', [
     'INTERNAL_SECRET' => 'DEF_0.9 Int_tok tok-sec',
 ]);
 
-//SESSION CONFIG
-define('SESSION_KEY', 'bRuD5WYw5wd0rdHR9yLlM6wt2vteuiniQBqE70nAuhU=');
+//SESSIONS
+define('SESSION_KEY', 'bRuD5WYw5wd0rdHR9yLlM6wt2vteuiniQBqE70nAuhU='); //temp
 define('SESSION_TTL', 60);

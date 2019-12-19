@@ -258,6 +258,7 @@ class File
 
     protected function error_text($err_num) 
     {
+        // externalize messages
         $error[0] = 'File: <b>'.$this->the_file.'</b> successfully uploaded!';
         $error[1] = 'The uploaded file exceeds the max. upload filesize directive in the server configuration.';
         $error[2] = 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the html form.';
@@ -275,8 +276,8 @@ class File
         $error[15] = 'Uploading <b>'.$this->the_file.'...Error!</b> Sorry, a file with this name already exitst.';
         $error[16] = 'The uploaded file is renamed to <b>'.$this->file_copy.'</b>.';
         $error[17] = 'The file %s does not exist.';
-        $error[18] = 'The file type (MIME type) is not valid.'; // new ver. 2.33
-        $error[19] = 'The MIME type check is enabled, but is not supported.'; // new ver. 2.34
+        $error[18] = 'The file type (MIME type) is not valid.'; 
+        $error[19] = 'The MIME type check is enabled, but is not supported.'; 
         
         return $error[$err_num];
     }
