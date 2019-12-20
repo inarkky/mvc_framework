@@ -2,9 +2,10 @@
 
 use application\core\Router;
 use application\core\Middleware;
+use application\helpers\Debug;
 
 define('ROOT_PATH', __DIR__. '/');
-require_once 'application/config/config.php';
+require_once ROOT_PATH . 'application/config/config.php';
 
 spl_autoload_register(function($class) {
     $path = str_replace('\\', '/', $class.'.php');
@@ -22,7 +23,7 @@ if(ENVIRONMENT === 'dev') {
     die('Fatal error: environment not defined or valid!');
 }
 
-Middleware::persister();
+Middleware::persist();
 
 $router = new Router;
 $router->run();

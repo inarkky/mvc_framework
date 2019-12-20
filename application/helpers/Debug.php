@@ -85,7 +85,7 @@ class Debug
             self::style() . PHP_EOL . '<pre class="debug log">'
             . implode(
                 '</pre>' . PHP_EOL . '<pre class="log">'
-                , array_map('Debug::var_export', $args)
+                , array_map(array(__CLASS__, 'var_export'), $args)
             )
             . '</pre>'
         );
@@ -173,7 +173,7 @@ class Debug
             return false;
         }
         $stack = $stack ?: array_slice(debug_backtrace(false), ($type & E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE) ? 2 : 1);
-        self::overload($stack, $file, $line); // switch line & file if overloaded method triggered the error
+        self::overload($stack, $file, $line); // switch line & file if overload method triggered the error
         echo self::style(), PHP_EOL, '<pre class="debug error ', strtolower(self::$error[$type]), '">', PHP_EOL,
         sprintf('<b>%s</b>: %s in <b>%s</b> on line <b>%s</b>'
             , self::$error[$type] ?: 'Error'
@@ -186,7 +186,7 @@ class Debug
             echo self::context($stack, $scope);
         }
         echo '</pre>';
-        if ($type & E_USER_ERROR) // well fuck it.. fatal error
+        if ($type & E_USER_ERROR) // well, fuck it.. fatal error
         {
             exit;
         }
@@ -199,16 +199,12 @@ class Debug
         }
     }
 
-//    public static function exception(\PDOException $exception)
-//    public static function exception(\Error $exception)
-    public static function exception(Throwable $exception)
+    public static function exception(Throwable $exception) //fuckin throwable.. don't change
     {
         $msg = sprintf('"%s" with message "%s"', get_class($exception), $exception->getMessage());
         self::handler(-1, $msg, $exception->getFile(), $exception->getLine(), null, $exception->getTrace());
         error_log(print_r($msg, TRUE), 3, LOGS_PATH . "Errors.log");
     }
-
-
 
     protected static function style()
     {
@@ -221,8 +217,6 @@ class Debug
         }
         return PHP_EOL . '<style type="text/css">' . $style . '</style>';
     }
-
-
 
     protected static function overload(&$stack, &$file, &$line)
     {

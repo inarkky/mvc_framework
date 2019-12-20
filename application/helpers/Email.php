@@ -204,7 +204,7 @@ class Email
 	{
 		$this->subject = Validation::sanatize($this->subject);
 		$this->message = Validation::sanatize($this->message);
-		$this->message = wordwrap($this->message, 70, "\r\n"); //stupid php
+		$this->message = wordwrap($this->message, 70, "\r\n"); //stupid email
 	}
 
 	private function validate_message()

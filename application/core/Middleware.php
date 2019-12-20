@@ -1,6 +1,5 @@
 <?php
 
-
 namespace application\core;
 
 
@@ -12,10 +11,10 @@ class Middleware
 
     public static function debug()
     {
-        Logger::register();
+        Logger::run();
     }
 
-    public static function persister()
+    public static function persist()
     {
         Persister::run();
     }

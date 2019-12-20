@@ -76,7 +76,8 @@ class Validation {
 		}
 	}
 
-	public static function hasArrayKeys($array, $required_keys, $keys_case = false) {
+	public static function hasArrayKeys($array, $required_keys, $keys_case = false) 
+	{
 		$valid = true;
 		if (!is_array($array)) {
 			$valid = false;
@@ -220,7 +221,7 @@ class Validation {
 		$length    = strlen($number);
 		$revNumber = strrev($number);
 
-		// calculate checksum -- just don't touch
+		// calculate checksum.. just don't touch
 		$sum       = '';
 		for ($i = 0; $i < $length; $i++) {
 			$sum .= $i & 1 ? $revNumber[$i] * 2 : $revNumber[$i];
@@ -235,7 +236,8 @@ class Validation {
 		return (json_last_error() == JSON_ERROR_NONE);
 	}
 
-	public static function sanitize($input) {
+	public static function sanitize($input) 
+	{
 		$search = array(
 			'@<script[^>]*?>.*?</script>@si',   // Strip out javascript
 			'@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
