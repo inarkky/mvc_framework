@@ -42,7 +42,7 @@ class Email
 		return $this;
 	}
 
-	public function setFrom($from = EMAIL['INFO'])
+	public function setFrom($from)
 	{
 		$this->from = $from;
 		return $this;
