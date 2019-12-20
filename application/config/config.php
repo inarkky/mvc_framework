@@ -31,18 +31,15 @@ define ('CONNECTIONS', [
 define("EMAIL", [
     "ADMIN" => [
         "name"      => "Administrator",
-        "email"     => "admin@mail.com",
-        "noReply"   => false
+        "email"     => "admin@mail.com"
     ],
     "FEED"  => [
         "name"      => "Feedback",
-        "email"     => "feedback@mail.com",
-        "noReply"   => false
+        "email"     => "feedback@mail.com"
     ],
     "INFO"  => [
         "name"      => "Info Service",
-        "email"     => "info@mail.com",
-        "noReply"   => true
+        "email"     => "info@mail.com"
     ]
 ]);
 
