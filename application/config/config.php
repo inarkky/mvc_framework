@@ -1,7 +1,7 @@
 <?php
 
 define('ENVIRONMENT', 'dev');
-define('ROOT_URI_PATH', '/borna/'); //or if you are on xampp name of the project folder in htdocs
+define('ROOT_URI_PATH', '/'); //or if you are on xampp name of the project folder in htdocs
 define('LANG', 'en'); //TODO: translations
 define('TIMEZONE', 'UTC'); 
 
